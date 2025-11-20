@@ -4,6 +4,7 @@ logs
 
 .vscode/
 
+**/.env
 **/*.key
 **/tsig-keys.json
 
