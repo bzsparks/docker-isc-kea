@@ -1,0 +1,45 @@
+services:
+  kea-dhcp4-primary:
+    container_name: kea-dhcp4-primary
+    image: docker.cloudsmith.io/isc/docker/kea-dhcp4:${KEA_VERSION}
+    cap_add:
+      - NET_ADMIN
+      - NET_BIND_SERVICE
+      - NET_RAW
+    restart: always
+    networks:
+      dhcp-network:
+        ipv4_address: ${DHCPv4_SERVER_IP}
+    volumes:
+      - "./leases:/var/lib/kea"
+      - "./config/kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro"
+      - "../kea-shared/ha-peers-primary.json:/etc/kea/ha-peers-primary.json:ro"
+      - "../kea-shared/subnet-id1.json:/etc/kea/subnet-id1.json:ro"
+      - "../kea-shared/subnet-id2.json:/etc/kea/subnet-id2.json:ro"
+      - "../kea-shared/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
+    ports:
+      - "67:67/udp"
+      - "8000:8000"
+      - "8001:8001"
+
+  kea-ddns-primary:
+    container_name: kea-ddns-primary
+    image: docker.cloudsmith.io/isc/docker/kea-dhcp-ddns:${KEA_VERSION}
+    depends_on:
+      - kea-dhcp4-primary
+    restart: always
+    networks:
+      dhcp-network:
+        ipv4_address: ${DDNS_SERVER_IP}
+    volumes:
+      - "./config/kea-dhcp-ddns.conf:/etc/kea/kea-dhcp-ddns.conf:ro"
+      - "../kea-shared/tsig-keys.json:/etc/kea/tsig-keys.json:ro"
+      - "../kea-shared/forward-ddns.json:/etc/kea/forward-ddns.json:ro"
+      - "../kea-shared/reverse-ddns.json:/etc/kea/reverse-ddns.json:ro"
+
+networks:
+  dhcp-network:
+    driver: bridge
+    ipam: 
+      config:
+        - subnet: ${NETWORK_CIDR}
