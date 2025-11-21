@@ -1,4 +1,23 @@
 services:
+  caddy:
+    build: ./dockerfile-caddy
+    container_name: caddy
+    hostname: caddy
+    restart: always
+    networks:
+      dhcp-network:
+        ipv4_address: ${CADDY_SERVER_IP}
+    ports:
+      - "443:443"
+    environment:
+      - MY_DOMAIN
+      - CLOUDFLARE_API_TOKEN
+      - DHCPv4_SERVER_IP
+    volumes:
+      - ../kea-data/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../kea-data/caddy_data:/data
+      - ../kea-data/caddy_config:/config
+
   kea-dhcp4-secondary:
     container_name: kea-dhcp4-secondary
     image: docker.cloudsmith.io/isc/docker/kea-dhcp4:${KEA_VERSION}
@@ -19,7 +38,7 @@ services:
       - "../kea-data/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
     ports:
       - "67:67/udp"
-      - "8000:8000"
+      #- "8000:8000"
       - "8001:8001"
 
   kea-ddns-secondary:
