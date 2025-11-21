@@ -7,6 +7,9 @@ services:
     networks:
       dhcp-network:
         ipv4_address: ${CADDY_SERVER_IP}
+    dns:
+      - 10.10.10.10
+      - 10.10.10.11
     ports:
       - "443:443"
     environment:
