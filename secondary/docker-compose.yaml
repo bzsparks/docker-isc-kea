@@ -13,7 +13,7 @@ services:
     volumes:
       - "./leases:/var/lib/kea"
       - "./config/kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro"
-      - "../kea-shared/ha-peers-primary.json:/etc/kea/ha-peers-secondary.json:ro"
+      - "../kea-shared/ha-peers-secondary.json:/etc/kea/ha-peers-secondary.json:ro"
       - "../kea-shared/subnet-id1.json:/etc/kea/subnet-id1.json:ro"
       - "../kea-shared/subnet-id2.json:/etc/kea/subnet-id2.json:ro"
       - "../kea-shared/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
