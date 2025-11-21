@@ -13,10 +13,10 @@ services:
     volumes:
       - "./leases:/var/lib/kea"
       - "./config/kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro"
-      - "../kea-shared/ha-peers-secondary.json:/etc/kea/ha-peers-secondary.json:ro"
-      - "../kea-shared/subnet-id1.json:/etc/kea/subnet-id1.json:ro"
-      - "../kea-shared/subnet-id2.json:/etc/kea/subnet-id2.json:ro"
-      - "../kea-shared/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
+      - "../kea-data/ha-peers-secondary.json:/etc/kea/ha-peers-secondary.json:ro"
+      - "../kea-data/subnet-id1.json:/etc/kea/subnet-id1.json:ro"
+      - "../kea-data/subnet-id2.json:/etc/kea/subnet-id2.json:ro"
+      - "../kea-data/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
     ports:
       - "67:67/udp"
       - "8000:8000"
@@ -33,9 +33,9 @@ services:
         ipv4_address: ${DDNS_SERVER_IP}
     volumes:
       - "./config/kea-dhcp-ddns.conf:/etc/kea/kea-dhcp-ddns.conf:ro"
-      - "../kea-shared/tsig-keys.json:/etc/kea/tsig-keys.json:ro"
-      - "../kea-shared/forward-ddns.json:/etc/kea/forward-ddns.json:ro"
-      - "../kea-shared/reverse-ddns.json:/etc/kea/reverse-ddns.json:ro"
+      - "../kea-data/tsig-keys.json:/etc/kea/tsig-keys.json:ro"
+      - "../kea-data/forward-ddns.json:/etc/kea/forward-ddns.json:ro"
+      - "../kea-data/reverse-ddns.json:/etc/kea/reverse-ddns.json:ro"
 
 networks:
   dhcp-network:
