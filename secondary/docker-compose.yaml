@@ -7,9 +7,6 @@ services:
     networks:
       dhcp-network:
         ipv4_address: ${CADDY_SERVER_IP}
-    dns:
-      - 10.10.10.10
-      - 10.10.10.11
     ports:
       - "443:443"
     environment:
@@ -32,6 +29,9 @@ services:
     networks:
       dhcp-network:
         ipv4_address: ${DHCPv4_SERVER_IP}
+    dns:
+      - 10.10.10.10
+      - 10.10.10.11
     volumes:
       - "./leases:/var/lib/kea"
       - "./config/kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf:ro"
@@ -41,7 +41,6 @@ services:
       - "../kea-data/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
     ports:
       - "67:67/udp"
-      #- "8000:8000"
       - "8001:8001"
 
   kea-ddns-secondary:
@@ -53,6 +52,9 @@ services:
     networks:
       dhcp-network:
         ipv4_address: ${DDNS_SERVER_IP}
+    dns:
+      - 10.10.10.10
+      - 10.10.10.11
     volumes:
       - "./config/kea-dhcp-ddns.conf:/etc/kea/kea-dhcp-ddns.conf:ro"
       - "../kea-data/tsig-keys.json:/etc/kea/tsig-keys.json:ro"
