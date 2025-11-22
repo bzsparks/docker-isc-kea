@@ -4,11 +4,11 @@ https://kea.readthedocs.io/en/kea-3.0.2/arm/hooks.html#https-support
 <br/>
 <br/>
 <br/>
-<br/>
 ### Generate ED25519 key
 ```shell
 openssl genpkey -algorithm ed25519 -out server.key
 ```
+
 <br/>
 ### Generate CSR
 ```shell
@@ -26,6 +26,7 @@ server.key -out server.crt
 * Kea http control agent - encrypted with Caddy reverse proxy using LetsEncrypt TLS, exposed on 443 externally mapped to 8000 internally
 * Kea HA control channel - uses self-signed 10 year certificate to encrypt HA communications between Kea servers
 * Kea DDNS server is unencryted but never exposed to the external network.  It is bound to the docker bridge network
+
 
 
 
