@@ -531,13 +531,11 @@ docker compose logs kea-dhcp4-secondary | grep "high-availability"
 
 ```bash
 # Check HA status via API (primary)
-curl https://kea-primary.example.com/ha-heartbeat
+curl -X POST -H "Content-Type: application/json" -d '{ "command": "ha-heartbeat" }' https://kea-primary.example.com
 
 # Get lease statistics
-curl https://kea-primary.example.com/stat-lease4-get
+curl -X POST -H "Content-Type: application/json" -d '{ "command": "lease4-get-all", "service": [ "dhcp4" ] }' https://kea-primary.example.com |  jq '.[].arguments.leases[] | {"hostname", "hw-address", "ip-address"}'
 
-# Check DDNS service
-docker exec kea-ddns-primary cat /var/log/kea-dhcp-ddns.log
 ```
 
 #### 6. Test DHCP Lease Assignment
@@ -734,6 +732,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 ---
 
 **Built with ❤️ for reliable, secure DHCP infrastructure**
+
 
 
 
