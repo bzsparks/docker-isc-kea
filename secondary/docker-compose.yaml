@@ -39,6 +39,7 @@ services:
       - "../kea-data/subnet-id1.json:/etc/kea/subnet-id1.json:ro"
       - "../kea-data/subnet-id2.json:/etc/kea/subnet-id2.json:ro"
       - "../kea-data/subnet-id3.json:/etc/kea/subnet-id3.json:ro"
+      - "../kea-data/subnet-id4.json:/etc/kea/subnet-id4.json:ro"
       - "../kea-data/server.crt:/etc/kea/server.crt:ro"
       - "../kea-data/server.key:/etc/kea/server.key:ro"
     ports:
