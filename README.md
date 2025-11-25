@@ -4,7 +4,7 @@
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-> **Production-ready, high-availability ISC Kea DHCPv4 deployment with TLS-secured HA channel, Dynamic DNS integration, and HTTPS API access via Caddy reverse proxy.**
+> **High-Availability ISC Kea DHCPv4 deployment with TLS-secured HA channel, Dynamic DNS integration, and HTTPS API access via Caddy reverse proxy.**
 
 ---
 
@@ -732,6 +732,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 ---
 
 **Built with ❤️ for reliable, secure DHCP infrastructure**
+
 
 
 
